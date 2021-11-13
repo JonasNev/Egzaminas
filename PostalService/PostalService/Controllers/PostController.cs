@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PostalService.Models;
 using PostalService.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PostalService.Controllers
@@ -19,14 +17,12 @@ namespace PostalService.Controllers
             _postService = postService;
         }
 
-        // GET: api/Bettor
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
         {
             return await _postService.GetAllAsync();
         }
 
-        // GET: api/Bettor/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Post>> GetPost(int id)
         {
@@ -40,7 +36,6 @@ namespace PostalService.Controllers
             return bettor;
         }
 
-        // PUT: api/Bettor/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPost(Post post)
         {
@@ -49,7 +44,6 @@ namespace PostalService.Controllers
             return NoContent();
         }
 
-        // POST: api/Bettor
         [HttpPost]
         public async Task<ActionResult<Post>> AddPost(Post post)
         {
@@ -58,7 +52,6 @@ namespace PostalService.Controllers
             return CreatedAtAction("GetPost", new { id = post.Id }, post);
         }
 
-        // DELETE: api/Bettor/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePost(int id)
         {

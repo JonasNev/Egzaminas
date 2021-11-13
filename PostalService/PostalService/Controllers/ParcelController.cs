@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PostalService.Models;
 using PostalService.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PostalService.Controllers
@@ -52,9 +50,17 @@ namespace PostalService.Controllers
         [HttpPost]
         public async Task<ActionResult<Parcel>> AddParcel(Parcel parcel)
         {
-            await _parcelService.AddAsync(parcel);
+            //Checks if parsel can still be placed in the selected post
+            if (_parcelService.CheckCapacity((int)parcel.PostId) == false)
+            {
+                return BadRequest("This post cannot take in any more parcels");
+            }
+            else
+            {
+                await _parcelService.AddAsync(parcel);
+                return CreatedAtAction("GetParcel", new { id = parcel.Id }, parcel);
+            }
 
-            return CreatedAtAction("GetParcel", new { id = parcel.Id }, parcel);
         }
 
         [HttpDelete("{id}")]

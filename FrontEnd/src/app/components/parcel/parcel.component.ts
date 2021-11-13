@@ -86,6 +86,9 @@ export class ParcelComponent implements OnInit {
     this.editCustomer=true;
     this.FormHeader="Create" 
     this.ResetValues();
+    this.postService.GetPosts().subscribe((postsFromApi) =>{
+      this.posts = postsFromApi.sort((a,b) => a.town.localeCompare(b.town));
+    })
   }
   ShowForm=function(parcel)  
   {  
