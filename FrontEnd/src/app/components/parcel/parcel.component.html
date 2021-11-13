@@ -24,11 +24,11 @@
     </thead>
     <tbody>
       <tr class="p-3" *ngFor="let parcel of parcels">
-        <td class="ps-3 pe-3">{{ parcel.weight }}</td>
+        <td class="ps-3 pe-3">{{ parcel.weight }} g.</td>
         <td class="ps-3 pe-3">{{ parcel.phoneNumber }}</td>
         <td class="ps-3 pe-3">{{ parcel.text }}</td>
-        <td class="ps-3 pe-3">{{ parcel.post.town }}</td>
-        <button class="btn btn-danger" (click)="deleteparcel(parcel)">Delete</button>
+        <td class="ps-3 pe-3">{{ parcel.post.code }}</td>
+        <button class="btn btn-danger" (click)="deleteParcel(parcel)">Delete</button>
         <button class="btn btn-warning" (click)="ShowForm(parcel)">Edit</button>
       </tr>
     </tbody>
@@ -41,30 +41,30 @@
       <tbody>  
         <tr>  
           <td>Weight</td>  
-          <td><input type="int" name="wight" [(ngModel)]='weight' ></td>  
+          <td><input type="number" name="weight" class="form-control" [(ngModel)]='weight' placeholder="Weight in grams" ></td>  
           </tr>  
           <tr>  
           <td>Phone Number</td>  
-          <td><input type="int" name="phoneNumber" [(ngModel)]='phoneNumber'></td>  
+          <td><input type="number" name="phoneNumber" class="form-control" [(ngModel)]='phoneNumber' placeholder="e.g. 864544964"></td>  
           </tr>  
           <tr>  
           <td>Information</td>  
-          <td><input type="text" name="text" [(ngModel)]='text'></td>  
+          <td><input type="text" name="text" class="form-control" [(ngModel)]='text' placeholder="Name, package, fragility"></td>  
           </tr> 
           <tr>  
             <td>Post Selection</td>  
             <td class="align-middle">
                 <select name="postId" [(ngModel)]="postId" [ngModelOptions]="{standalone: true}" class="w-50">
                   <option *ngFor="let post of posts" value="{{ post.id }}">
-                    {{ post.town }}
+                    {{ post.code }}
                   </option>
                 </select>
               </td>
             </tr>  
           <tr> 
             <td><input type="hidden" name="id" [(ngModel)]='id'></td>  
-            <td><input class="form-control col-sm-2" id="btn1" disabled="false" type="button" value="Save" (click)="updatePost()"></td> 
-            <td><button class="btn btn-primary" id="btn2" type="submit"(click)="addPost()">Add</button></td> 
+            <td><input class="form-control col-sm-2" id="btn1" disabled="false" type="button" value="Save" (click)="updateParcel()"></td> 
+            <td><button class="btn btn-primary" id="btn2" type="submit"(click)="addParcel()">Add</button></td> 
         </tr>  
       </tbody>  
     </table>  

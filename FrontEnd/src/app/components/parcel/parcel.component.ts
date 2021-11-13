@@ -34,6 +34,7 @@ export class ParcelComponent implements OnInit {
     this.postService.GetPosts().subscribe((postsFromApi) =>{
       this.posts = postsFromApi.sort((a,b) => a.town.localeCompare(b.town));
     })
+    console.log(this.posts)
   }
   public addParcel() : void {
     var parcel: Parcel = {
@@ -52,6 +53,7 @@ export class ParcelComponent implements OnInit {
 
   public updateParcel() : void{
     var parcel: Parcel = {
+      id: this.id,
       weight: this.weight,
       phoneNumber: this.phoneNumber,
       text:this.text,
@@ -82,7 +84,8 @@ export class ParcelComponent implements OnInit {
   }
   EnableForm=function(){
     this.editCustomer=true;
-    this.FormHeader="Create"  
+    this.FormHeader="Create" 
+    this.ResetValues();
   }
   ShowForm=function(parcel)  
   {  
@@ -96,13 +99,23 @@ export class ParcelComponent implements OnInit {
     else{  
       this.ResetValues();  
     }  
+    document.getElementById("btn1").removeAttribute("disabled");
+    document.getElementById("btn2").setAttribute("disabled","true");
   }
   SetValuesForEdit=function(parcel)  
   {  
+    this.id = parcel.id;
     this.weight = parcel.weight;
     this.phoneNumber = parcel.phoneNumber;
     this.text = parcel.text;
     this.postId = parcel.postId
     this.FormHeader="Edit"  
   }  
+  ResetValues(){
+    this.id = null;
+    this.weight = null;
+    this.phoneNumber = null;
+    this.text = "";
+    this.postId = null;
+  }
 }

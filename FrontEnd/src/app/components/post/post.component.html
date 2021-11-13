@@ -1,1 +1,44 @@
-<p>post works!</p>
+<table id="menu" class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Town</th>
+        <th scope="col">Capacity</th>
+        <th scope="col">Code</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="p-3" *ngFor="let post of posts">
+        <td class="ps-3 pe-3">{{ post.town }}</td>
+        <td class="ps-3 pe-3">{{ post.capacity }}</td>
+        <td class="ps-3 pe-3">{{ post.code }}</td>
+        <button class="btn btn-danger" (click)="deletePost(post)">Delete</button>
+        <button class="btn btn-warning" (click)="ShowForm(post)">Edit</button>
+      </tr>
+    </tbody>
+  </table>
+<button class="btn btn-primary" (click)="EnableForm()">Add</button>
+<form #regForm="ngForm">  
+  <div class="container" *ngIf="editCustomer">   
+    <table class="table table-condensed">  
+      <tbody>  
+        <tr>  
+          <td>Town</td>  
+          <td><input type="text" class="form-control" name="town" [(ngModel)]='town' ></td>  
+          </tr>  
+          <tr>  
+          <td>Capacity</td>  
+          <td><input type="number" class="form-control" name="capacity" [(ngModel)]='capacity'></td>  
+          </tr>  
+          <tr>  
+          <td>Code</td>  
+          <td><input type="text" class="form-control" name="code" [(ngModel)]='code'></td>  
+          </tr> 
+          <tr> 
+            <td><input type="hidden" name="id" [(ngModel)]='id'></td>  
+            <td><input class="form-control col-sm-2" id="btn1" disabled="false" type="button" value="Save" (click)="updatePost()"></td> 
+            <td><button class="btn btn-primary" id="btn2" type="submit"(click)="addPost()">Add</button></td> 
+        </tr>  
+      </tbody>  
+    </table>  
+   </div>  
+  </form>
